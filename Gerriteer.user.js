@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Gerriteer
 // @namespace   http://brightbyte.de/gm/
-// @description Make the Wikimedia Gerrit Dashboard usable
+// @description Make the Wikimedia Gerrit Dashboard usable. Use with the "classic" UI of Gerrit 2.8.
 // @include     https://gerrit.wikimedia.org/
 // @include     https://gerrit.wikimedia.org/r/
 // @include     https://gerrit.wikimedia.org/r/#/*
