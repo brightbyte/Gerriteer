@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Gerriteer
 // @namespace   http://brightbyte.de/gm/
-// @description Make the Wikimedia Gerrit Dashboard usable. Use with the "classic" UI of Gerrit 2.8.
+// @description Make the Wikimedia Gerrit Dashboard usable. Use with Gerrit 2.12.
 // @include     https://gerrit.wikimedia.org/
 // @include     https://gerrit.wikimedia.org/r/
 // @include     https://gerrit.wikimedia.org/r/#/*
@@ -97,10 +97,11 @@ var changeTableProcessor = {
 	},
 
 	rearrangeRow: function ( row ) {
-		var cellSubject = row.cells[2];
-		var cellStatus = row.cells[3];
-		var cellCR = row.cells[8];
-		var cellV =  row.cells[9];
+		var cellSubject = row.cells[3];
+		var cellStatus = row.cells[4];
+		var cellSize = row.cells[9];
+		var cellCR = row.cells[10];
+		var cellV =  row.cells[11];
 
 		var status = $.text( cellStatus );
 		
@@ -114,11 +115,16 @@ var changeTableProcessor = {
 	},
 
 	classifyRow: function ( row ) {
-		var $icon = $( row.cells[1] ).children( 'img' );
+        	// NOTE: column indexes AFTER rearrangeRow() was applied.
+		var cellIcon = row.cells[1];
+                var cellStatus = row.cells[3];	
+                var cellUpdated = row.cells[10];	
+
+		var $icon = $( cellIcon ).children( 'img' );
                 var iconStyle = $icon.length == 0 ? null : $icon.attr( 'style' );
 
-                var status = row.cells[2].title;
-		var updated = $.text( row.cells[9] );
+                var status = cellStatus.title;
+		var updated = $.text( cellUpdated );
 
                 var oldExp = /.*(month|year|weeks).*/
 		var starredExp = /.*data:image\/gif;base64,R0lGODlhDwAPALMAAGho4ZeX6\/.*/
