@@ -121,18 +121,18 @@ var changeTableProcessor = {
                 var cellUpdated = row.cells[10];	
 
 		var $icon = $( cellIcon ).children( 'img' );
-                var iconStyle = $icon.length == 0 ? null : $icon.attr( 'style' );
+                var iconSrc = $icon.length == 0 ? null : $icon.attr( 'src' );
 
                 var status = cellStatus.title;
 		var updated = $.text( cellUpdated );
 
                 var oldExp = /.*(month|year|weeks).*/
-		var starredExp = /.*data:image\/gif;base64,R0lGODlhDwAPALMAAGho4ZeX6\/.*/
+		var starredExp = /^data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAMAAABFjsb.*/
 		
 		row.className += " section-" + this.section;
 		row.className += " status-" + ( status == '' ? 'Pending' : status );
 		
-		if ( iconStyle && iconStyle.match( starredExp ) ) {
+		if ( iconSrc && iconSrc.match( starredExp ) ) {
                     row.className += " flag-starred";
 		} else if ( updated.match( oldExp ) ) {
 			row.className += " age-old";
